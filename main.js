@@ -256,27 +256,6 @@
     w.tabIndex = 0; w.setAttribute('role', 'button');
   });
 
-  /* ---------- floating preview that follows the cursor over the list ---------- */
-  const pv = $('.preview'), pvi = $('.preview-inner');
-  if (fine && hasGsap) {
-    const px = gsap.quickTo(pv, 'x', { duration: .55, ease: 'power3' });
-    const py = gsap.quickTo(pv, 'y', { duration: .55, ease: 'power3' });
-    let lastX = 0;
-    addEventListener('pointermove', e => {
-      px(e.clientX); py(e.clientY);
-      gsap.to(pv, { rotation: gsap.utils.clamp(-12, 12, (e.clientX - lastX) * .6), duration: .5, ease: 'power3' });
-      lastX = e.clientX;
-    });
-    const works = $('.works');
-    works.addEventListener('mouseenter', () => gsap.to(pv, { autoAlpha: 1, scale: 1, duration: .45, ease: 'expo.out' }));
-    works.addEventListener('mouseleave', () => gsap.to(pv, { autoAlpha: 0, scale: .6, duration: .35, ease: 'expo.out' }));
-    gsap.set(pv, { autoAlpha: 0, scale: .6 });
-    $$('.work').forEach(w => w.addEventListener('mouseenter', () => {
-      pvi.style.backgroundImage = `url("${imgFor[w.dataset.project]}")`;
-      gsap.fromTo(pvi, { scale: 1.3 }, { scale: 1.1, duration: .8, ease: 'expo.out' });
-    }));
-  }
-
   /* ---------- project details ---------- */
   const REPOS = {
     medifolio: 'https://github.com/sohambarve03/medifolio-llm-medical-system',
@@ -334,7 +313,7 @@
       <div class="d-stats">${p.stats.map(([b, s]) => `<span><b>${b}</b>${s}</span>`).join('')}</div>
       <div class="d-stack">${p.stack.map(s => `<span>${s}</span>`).join('')}</div>
       <div class="d-links">${REPOS[key] ? `<a class="btn btn-fill" href="${REPOS[key]}" target="_blank" rel="noopener"><span>View code on GitHub ↗</span></a>` : ''}${p.link ? `<a class="btn btn-line" href="${p.link[1]}" target="_blank" rel="noopener"><span>${p.link[0]} ↗</span></a>` : ''}</div>
-      ${isPhoto ? `<p class="mono credit">Photo: <a href="${CREDIT[key][1]}" target="_blank" rel="noopener">${CREDIT[key][0]}</a> / Unsplash</p>` : ''}</div>`;
+      </div>`;
     $('.d-img img', dc).onerror = function () { this.onerror = null; this.src = `assets/projects/${key}.jpg`; };
     dlg.showModal();
     if (hasGsap) gsap.from($('.d-img img', dc), { scale: 1.25, duration: 1.4, ease: 'expo.out' });

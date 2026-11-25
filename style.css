@@ -305,6 +305,14 @@ dialog::backdrop { background: rgba(10,9,8,.55); backdrop-filter: blur(4px); }
 .roll-face::after { content: ""; position: absolute; inset: 0; background: #0a0619; opacity: var(--sh); pointer-events: none; }
 .roll-track { scale: var(--sx) 1; }
 
+/* simple hover thumbnail inside the row (desktop) */
+@media (min-width: 761px) {
+  .work .w-thumb { display: block; position: absolute; right: 20px; top: 50%; width: 132px; aspect-ratio: 3 / 2; margin-top: -44px; border-radius: 8px; overflow: hidden; opacity: 0; transition: opacity .3s; pointer-events: none; border: 2px solid var(--ct, #fff); }
+  .work .w-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .work:hover .w-thumb { opacity: 1; }
+  .work:hover .w-y, .work:hover .w-go { opacity: 0; }
+}
+
 /* colourful rows */
 .work:nth-child(5n+1) { --c: var(--accent); --ct: #fff; }
 .work:nth-child(5n+2) { --c: var(--blue); --ct: #fff; }
