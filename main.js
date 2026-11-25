@@ -112,17 +112,26 @@
   buildRoll();
   let rollTimer; addEventListener('resize', () => { clearTimeout(rollTimer); rollTimer = setTimeout(buildRoll, 200); });
   document.fonts && document.fonts.ready.then(() => { if (tracks[0]) half = tracks[0].scrollWidth / 3; });
-  if (hasGsap) {
-    let ang = 0, slide = 0, dir = 1, boost = 0;
-    ScrollTrigger.create({ onUpdate: st => { dir = st.direction; boost = Math.min(Math.abs(st.getVelocity()) / 90, 22); } });
-    gsap.ticker.add(() => {
-      const sp = (0.5 + boost) * dir;
-      ang += sp * .55; slide -= sp * 1.1; boost *= .93;
-      drum.style.transform = `rotateX(${ang}deg)`;
-      if (half) slide = ((slide % half) - half) % half;
-      tracks.forEach((t, i) => t.style.transform = `translateX(${(i % 2 ? -half - slide : slide) - (i * 41) % 200}px)`);
+  // the roll is locked to the scroll position: scroll down and it rolls forward, scroll up and it rolls back
+  let ang = 0, drift = 0;
+  const STEP = 360 / N;
+  const spin = () => {
+    drift += 0.12;
+    const target = scrollY * 0.5 + drift;
+    ang += (target - ang) * 0.14;
+    drum.style.transform = `rotateX(${ang}deg)`;
+    const slide = ang * 2.2;
+    tracks.forEach((t, i) => {
+      const off = half ? ((i % 2 ? slide : -slide) - (i * 41) % 200) % half - half : 0;
+      t.style.transform = `translateX(${off}px)`;
+      const c = Math.cos((ang - i * STEP) * Math.PI / 180); // 1 = facing you, -1 = round the back
+      const f = t.parentNode;
+      f.style.setProperty('--sh', (0.62 * (1 - Math.max(0, c))).toFixed(3));
+      f.style.setProperty('--sx', (1 + 0.05 * c).toFixed(4));
     });
-  }
+    requestAnimationFrame(spin);
+  };
+  requestAnimationFrame(spin);
 
   /* ---------- hero letters thicken near the cursor ---------- */
   $$('.hero-title .word:not(.hero-arrow):not(.badge-word)').forEach(w => {
@@ -343,37 +352,4 @@
   const copyMail = () => navigator.clipboard ? navigator.clipboard.writeText('soham.barve05@gmail.com').then(() => say('Email copied'), () => say('soham.barve05@gmail.com')) : say('soham.barve05@gmail.com');
   $('#copy-mail').addEventListener('click', copyMail);
 
-  /* ---------- quick menu (⌘K or /) ---------- */
-  const pal = $('#palette'), pin = $('#palette-input'), plist = $('#palette-list');
-  const go = id => () => $(id).scrollIntoView({ behavior: 'smooth' });
-  const items = [
-    ['Work', 'section', go('#work')], ['Experience', 'section', go('#path')], ['About', 'section', go('#about')], ['Contact', 'section', go('#contact')],
-    ...Object.entries(P).map(([k, p]) => [p.title, 'project', () => openProject(k)]),
-    ['Copy email address', 'action', copyMail],
-    ['Switch light / dark', 'action', () => $('#theme-btn').click()],
-    ['Send an email', 'link', () => location.href = 'mailto:soham.barve05@gmail.com'],
-    ['LinkedIn', 'link', () => open('https://www.linkedin.com/in/sohambarve')],
-    ['GitHub', 'link', () => open('https://github.com/sohambarve03')]
-  ];
-  let sel = 0, shown = items;
-  const render = () => {
-    const q = pin.value.toLowerCase().trim();
-    shown = items.filter(i => i[0].toLowerCase().includes(q) || i[1].includes(q));
-    sel = Math.min(sel, Math.max(0, shown.length - 1));
-    plist.innerHTML = shown.map((it, i) => `<li class="${i === sel ? 'sel' : ''}" data-i="${i}"><span>${it[0]}</span><span class="k">${it[1]}</span></li>`).join('') || '<li><span>Nothing found</span></li>';
-  };
-  const run = i => { const it = shown[i]; if (!it) return; pal.close(); it[2](); };
-  const openPal = () => { if (dlg.open) dlg.close(); pin.value = ''; sel = 0; render(); pal.showModal(); pin.focus(); };
-  $('#cmdk-open').addEventListener('click', openPal);
-  pin.addEventListener('input', () => { sel = 0; render(); });
-  pin.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown') { sel = (sel + 1) % shown.length; render(); e.preventDefault(); }
-    if (e.key === 'ArrowUp') { sel = (sel - 1 + shown.length) % shown.length; render(); e.preventDefault(); }
-    if (e.key === 'Enter') run(sel);
-  });
-  plist.addEventListener('click', e => { const li = e.target.closest('li[data-i]'); if (li) run(+li.dataset.i); });
-  pal.addEventListener('click', e => { if (e.target === pal) pal.close(); });
-  addEventListener('keydown', e => {
-    if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !/input|textarea/i.test(document.activeElement.tagName))) { e.preventDefault(); openPal(); }
-  });
 })();

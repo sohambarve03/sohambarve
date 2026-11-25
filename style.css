@@ -254,16 +254,6 @@ dialog::backdrop { background: rgba(10,9,8,.55); backdrop-filter: blur(4px); }
 .d-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .credit { color: var(--dim); margin: 22px 0 0; font-size: 12px; }
 
-/* palette */
-.palette { width: min(560px, calc(100% - 24px)); margin-top: 14vh; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
-.palette[open] { animation: rise .4s var(--ease); }
-.palette input { width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--line); padding: 18px 20px; color: var(--ink); font: inherit; font-size: 18px; outline: none; }
-.palette ul { list-style: none; margin: 0; padding: 8px; max-height: 320px; overflow: auto; }
-.palette li { display: flex; justify-content: space-between; padding: 10px 12px; border-radius: 8px; cursor: pointer; }
-.palette li .k { font-family: var(--mono); font-size: 11px; color: var(--dim); text-transform: uppercase; }
-.palette li.sel { background: var(--ink); color: var(--bg); }
-.palette-foot { margin: 0; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--dim); }
-
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); opacity: 0; background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 999px; transition: .4s var(--ease); z-index: 450; pointer-events: none; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
@@ -288,7 +278,7 @@ dialog::backdrop { background: rgba(10,9,8,.55); backdrop-filter: blur(4px); }
 /* the paper roll */
 .roll { position: relative; overflow: visible; clip-path: inset(0); height: calc(var(--R, 120px) * 2.15); background: var(--ink); }
 .roll-drum { position: absolute; left: 0; right: 0; top: 50%; height: 0; transform-style: preserve-3d; }
-.roll-face { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+.roll-face { position: absolute; left: 0; right: 0; top: 0; --sh: 0; --sx: 1; display: flex; align-items: center; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
   background-color: var(--paper); color: var(--paper-ink);
   background-image: radial-gradient(rgba(29,21,55,.07) 1px, transparent 1.4px); background-size: 9px 9px;
   border-top: 2px dashed rgba(29,21,55,.16); }
@@ -311,6 +301,9 @@ dialog::backdrop { background: rgba(10,9,8,.55); backdrop-filter: blur(4px); }
 .sec-head .kicker { justify-self: start; align-self: end; margin-bottom: 14px; }
 .hero-top span:first-child { white-space: nowrap; align-self: flex-start; }
 .hl { letter-spacing: -0.035em; }
+
+.roll-face::after { content: ""; position: absolute; inset: 0; background: #0a0619; opacity: var(--sh); pointer-events: none; }
+.roll-track { scale: var(--sx) 1; }
 
 /* colourful rows */
 .work:nth-child(5n+1) { --c: var(--accent); --ct: #fff; }
