@@ -107,7 +107,7 @@ body:not(.loading) .loader { pointer-events: none; }
 /* hero */
 .hero { position: relative; min-height: 100vh; min-height: 100svh; padding: 110px var(--pad) 40px; display: flex; flex-direction: column; }
 .hero-top { display: flex; justify-content: space-between; gap: 16px; color: var(--soft); padding-bottom: 18px; border-bottom: 1px solid var(--line); }
-.hero-title { margin: auto 0 0; padding-top: 5vh; font-weight: 600; font-size: clamp(48px, 7.6vw, 132px); line-height: .94; letter-spacing: -0.05em; font-variation-settings: "opsz" 96; }
+.hero-title { margin: auto 0 0; padding-top: 5vh; font-weight: 600; font-size: clamp(48px, 9.4vw, 156px); line-height: .94; letter-spacing: -0.05em; font-variation-settings: "opsz" 96; }
 .ch { display: inline-block; transition: font-weight .25s; }
 .line { display: block; overflow: hidden; padding-bottom: .04em; }
 .word { display: inline-block; will-change: transform; }
