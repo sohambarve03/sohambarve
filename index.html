@@ -1,208 +1,202 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Soham Barve — AI &amp; Data Engineer</title>
   <meta name="description" content="Soham Barve, AI and data engineer in Dublin. LLM and RAG systems, Python, SQL and machine learning.">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#0b0b0d">
+  <meta name="theme-color" content="#f3efe7">
   <meta property="og:title" content="Soham Barve — AI & Data Engineer">
   <meta property="og:description" content="Messy data in. Systems that hold up, out.">
   <meta property="og:image" content="https://sohambarve03.github.io/sohambarve/assets/soham.jpg">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b0b0d'/><text x='16' y='21' font-family='monospace' font-size='14' text-anchor='middle' fill='%23c8f169'>sb</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='16' fill='%23e4572e'/><text x='16' y='21.5' font-family='Georgia,serif' font-style='italic' font-size='17' text-anchor='middle' fill='%23f3efe7'>s</text></svg>">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
-<body>
+<body class="loading">
 
-<div class="cursor" aria-hidden="true"></div>
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <span class="loader-name serif"><em>Soham Barve</em></span>
+    <span class="loader-count mono"><span id="load-n">0</span>%</span>
+  </div>
+  <div class="loader-bar"><i></i></div>
+</div>
 
-<header class="bar">
-  <a href="#top" class="brand"><span class="brand-mark">sb</span><span>Soham Barve</span></a>
-  <nav class="bar-nav">
-    <a href="#work">Work</a>
-    <a href="#path">Path</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+<div class="cursor" aria-hidden="true"><span></span></div>
+<div class="preview" aria-hidden="true"><div class="preview-inner"></div></div>
+
+<header class="nav">
+  <a href="#top" class="logo serif"><em>Soham</em> Barve</a>
+  <nav class="nav-links">
+    <a href="#work"><span>Work</span></a>
+    <a href="#path"><span>Experience</span></a>
+    <a href="#about"><span>About</span></a>
+    <a href="#contact"><span>Contact</span></a>
   </nav>
-  <div class="bar-right">
+  <div class="nav-right">
     <span class="status mono"><i></i>Open to work</span>
-    <button class="cmdk mono" id="cmdk-open" aria-label="Open quick menu">⌘K</button>
+    <button class="theme-btn" id="theme-btn" aria-label="Switch light or dark mode">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g></svg>
+    </button>
+    <button class="menu-btn mono" id="cmdk-open" aria-label="Open quick menu">⌘K</button>
   </div>
 </header>
 
 <main id="top">
 
   <section class="hero">
-    <div class="hero-copy">
-      <p class="mono eyebrow"><span class="pulse"></span>AI &amp; Data Engineer · Dublin <time id="clock" class="dim"></time></p>
-      <h1>
-        <span class="h-line"><span class="scramble" data-text="Messy data in.">Messy data in.</span></span>
-        <span class="h-line serif"><em>Systems that hold up,</em></span>
-        <span class="h-line serif"><em>out.</em></span>
-      </h1>
-      <p class="hero-sub">
-        I'm <strong>Soham Barve</strong>. I build RAG pipelines, LLM extraction and data validation
-        in Python and SQL, then test them the way they'll actually be used.
-        MSc at University College Dublin. First author at Springer.
-      </p>
-      <div class="hero-cta">
-        <a href="#work" class="btn btn-solid">See the work <span>→</span></a>
-        <a href="mailto:soham.barve05@gmail.com" class="btn btn-ghost">Email me</a>
-      </div>
+    <div class="hero-top mono">
+      <span>AI &amp; Data Engineer</span>
+      <span>Based in Dublin, IE <time id="clock"></time></span>
+      <span class="hide-sm">MSc · University College Dublin</span>
     </div>
 
-    <figure class="portrait" id="portrait">
-      <img src="assets/soham.jpg" alt="Soham Barve" id="portrait-img" width="640" height="800">
-      <canvas id="ascii" aria-hidden="true"></canvas>
-      <figcaption class="mono"><span>fig. 01 — me, as data</span><span class="hint">hover to reveal</span></figcaption>
-    </figure>
+    <h1 class="hero-title">
+      <span class="line"><span class="word">Messy</span> <span class="word">data</span> <span class="word">in.</span></span>
+      <span class="line serif"><em><span class="word">Systems</span> <span class="word">that</span> <span class="word">hold</span> <span class="word">up,</span></em></span>
+      <span class="line"><span class="word">out.</span><span class="word hero-arrow" aria-hidden="true">↘</span></span>
+    </h1>
+
+    <div class="hero-bottom">
+      <p class="hero-sub fade-up">
+        I'm <strong>Soham Barve</strong>. I build RAG pipelines, LLM extraction and data validation
+        in Python and SQL, then test them the way they'll actually be used.
+        First author at Springer. Open to roles in Ireland and India.
+      </p>
+      <figure class="portrait fade-up" id="portrait">
+        <img src="assets/soham.jpg" alt="Soham Barve" id="portrait-img" width="640" height="800">
+        <canvas id="ascii" aria-hidden="true"></canvas>
+        <figcaption class="mono"><span>fig. 01</span><span>hover to reveal</span></figcaption>
+      </figure>
+      <div class="hero-cta fade-up">
+        <a href="#work" class="btn btn-fill magnetic"><span>See selected work</span></a>
+        <a href="mailto:soham.barve05@gmail.com" class="btn btn-line magnetic"><span>Get in touch</span></a>
+      </div>
+    </div>
   </section>
 
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>Python</span><b>✦</b><span class="serif"><em>RAG</em></span><b>✦</b><span>LangChain</span><b>✦</b><span class="serif"><em>LLaMA 3</em></span><b>✦</b><span>PostgreSQL + pgvector</span><b>✦</b><span class="serif"><em>XGBoost</em></span><b>✦</b><span>FastAPI</span><b>✦</b><span class="serif"><em>Power BI</em></span><b>✦</b><span>AWS</span><b>✦</b><span class="serif"><em>EU AI Act</em></span><b>✦</b>
-      <span>Python</span><b>✦</b><span class="serif"><em>RAG</em></span><b>✦</b><span>LangChain</span><b>✦</b><span class="serif"><em>LLaMA 3</em></span><b>✦</b><span>PostgreSQL + pgvector</span><b>✦</b><span class="serif"><em>XGBoost</em></span><b>✦</b><span>FastAPI</span><b>✦</b><span class="serif"><em>Power BI</em></span><b>✦</b><span>AWS</span><b>✦</b><span class="serif"><em>EU AI Act</em></span><b>✦</b>
+      <span>Python</span><i>✳</i><span class="serif"><em>Retrieval-augmented generation</em></span><i>✳</i><span>LangChain</span><i>✳</i><span class="serif"><em>LLaMA 3</em></span><i>✳</i><span>PostgreSQL · pgvector</span><i>✳</i><span class="serif"><em>XGBoost</em></span><i>✳</i><span>FastAPI</span><i>✳</i><span class="serif"><em>Power BI</em></span><i>✳</i><span>AWS</span><i>✳</i><span class="serif"><em>EU AI Act</em></span><i>✳</i>
+      <span>Python</span><i>✳</i><span class="serif"><em>Retrieval-augmented generation</em></span><i>✳</i><span>LangChain</span><i>✳</i><span class="serif"><em>LLaMA 3</em></span><i>✳</i><span>PostgreSQL · pgvector</span><i>✳</i><span class="serif"><em>XGBoost</em></span><i>✳</i><span>FastAPI</span><i>✳</i><span class="serif"><em>Power BI</em></span><i>✳</i><span>AWS</span><i>✳</i><span class="serif"><em>EU AI Act</em></span><i>✳</i>
     </div>
   </div>
 
   <section class="numbers" aria-label="Highlights">
-    <div class="num" style="--c:var(--lime)"><p class="n"><span data-count="150" >0</span>k+</p><p class="l">payment records validated automatically</p></div>
-    <div class="num" style="--c:var(--sky)"><p class="n">~<span data-count="95">0</span>%</p><p class="l">retrieval accuracy on Medifolio's RAG layer</p></div>
-    <div class="num" style="--c:var(--coral)"><p class="n"><span data-count="24">0</span></p><p class="l">financial assets tracked by MacroSignal</p></div>
-    <div class="num" style="--c:var(--lilac)"><p class="n"><span data-count="20">0</span></p><p class="l">interns led across four teams</p></div>
-    <div class="num" style="--c:var(--sun)"><p class="n"><span data-count="65">0</span>%</p><p class="l">less daily preprocessing time after vectorising</p></div>
+    <div class="num"><p class="n"><span data-count="150">0</span>k+</p><p class="l">payment records validated automatically</p></div>
+    <div class="num"><p class="n">~<span data-count="95">0</span>%</p><p class="l">retrieval accuracy on Medifolio</p></div>
+    <div class="num"><p class="n"><span data-count="24">0</span></p><p class="l">financial assets tracked by MacroSignal</p></div>
+    <div class="num"><p class="n"><span data-count="20">0</span></p><p class="l">interns led across four teams</p></div>
+    <div class="num"><p class="n"><span data-count="2">0</span></p><p class="l">published research papers</p></div>
   </section>
 
   <section id="work" class="section">
     <header class="sec-head">
-      <p class="mono idx">01</p>
-      <h2>Selected <em class="serif">work</em></h2>
-      <p class="sec-note">Seven projects across RAG, forecasting, NLP and computer vision. Click any of them for the details.</p>
+      <p class="mono kicker">(01) — Selected work</p>
+      <h2 class="sec-title"><span class="line"><span class="word">Things</span> <span class="word">I've</span> <span class="word">built</span></span></h2>
     </header>
 
-    <div class="bento">
-      <button class="card c-feature" data-project="medifolio" style="--c:var(--lime)">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1758691461990-03b49d969495?auto=format&fit=crop&w=1400&q=80" data-fallback="assets/projects/medifolio.jpg" alt="Medifolio: scanned prescription turned into searchable patient records" loading="lazy" width="1800" height="1125"></div>
-        <div class="card-meta">
-          <p class="mono tag">RAG · OCR · Springer 2025</p>
-          <h3>Medifolio</h3>
-          <p>Handwritten prescriptions turned into searchable patient records, at ~95% retrieval accuracy.</p>
-          <span class="repo" data-href="https://github.com/sohambarve03/medifolio-llm-medical-system">GitHub repo ↗</span>
-        </div>
-        <span class="open mono">Open ↗</span>
-      </button>
-
-      <button class="card" data-project="macrosignal" style="--c:var(--coral)">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1560221328-12fe60f83ab8?auto=format&fit=crop&w=1400&q=80" data-fallback="assets/projects/macrosignal.jpg" alt="MacroSignal dashboard with news features and signals" loading="lazy" width="1800" height="1125"></div>
-        <div class="card-meta">
-          <p class="mono tag">LLM features · In progress</p>
-          <h3>MacroSignal</h3>
-          <p>News into LLaMA 3 features, then XGBoost signals across 24 assets.</p>
-          <span class="repo" data-href="https://github.com/sohambarve03/Macrosignal">GitHub repo ↗</span>
-        </div>
-        <span class="open mono">Open ↗</span>
-      </button>
-
-      <button class="card" data-project="toxic" style="--c:var(--lilac)">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1675352161865-27816c76141a?auto=format&fit=crop&w=1400&q=80" data-fallback="assets/projects/toxic.jpg" alt="Comment moderation queue with toxicity labels" loading="lazy" width="1800" height="1125"></div>
-        <div class="card-meta">
-          <p class="mono tag">NLP · HackMIT 3rd</p>
-          <h3>Toxic Comment Detection</h3>
-          <p>Fine-tuned RoBERTa, six labels, 0.82 macro-F1.</p>
-          <span class="repo" data-href="https://github.com/sohambarve03/toxic-comment-detector">GitHub repo ↗</span>
-        </div>
-        <span class="open mono">Open ↗</span>
-      </button>
-
-      <button class="card" data-project="arima" style="--c:var(--sky)">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1400&q=80" data-fallback="assets/projects/arima.jpg" alt="Notebook chart comparing ARIMA and hybrid forecasts" loading="lazy" width="1800" height="1125"></div>
-        <div class="card-meta">
-          <p class="mono tag">Forecasting · UCD 2026</p>
-          <h3>ARIMA × XGBoost</h3>
-          <p>A hybrid that cut MASE from 0.96 to 0.84.</p>
-        </div>
-        <span class="open mono">Open ↗</span>
-      </button>
-
-      <button class="card" data-project="syncsphere" style="--c:var(--sun)">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=1400&q=80" data-fallback="assets/projects/syncsphere.jpg" alt="SyncSphere video call with translated chat" loading="lazy" width="1800" height="1125"></div>
-        <div class="card-meta">
-          <p class="mono tag">Real-time · IJIRCCE 2024</p>
-          <h3>SyncSphere</h3>
-          <p>Encrypted chat with WebRTC video and live translation.</p>
-        </div>
-        <span class="open mono">Open ↗</span>
-      </button>
-
-      <button class="card" data-project="esg" style="--c:var(--lime)">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1782679226951-2e916ce69988?auto=format&fit=crop&w=1400&q=80" data-fallback="assets/projects/esg.jpg" alt="Green bond and ESG panel study figure" loading="lazy" width="1800" height="1125"></div>
-        <div class="card-meta">
-          <p class="mono tag">Econometrics · UCD 2026</p>
-          <h3>Green Bonds &amp; ESG</h3>
-          <p>Does issuing green bonds actually move ESG scores?</p>
-        </div>
-        <span class="open mono">Open ↗</span>
-      </button>
-
-      <button class="card" data-project="plates" style="--c:var(--coral)">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1532633130319-f16ab0a3a9c4?auto=format&fit=crop&w=1400&q=80" data-fallback="assets/projects/plates.jpg" alt="Number plate detected and read from a camera frame" loading="lazy" width="1800" height="1125"></div>
-        <div class="card-meta">
-          <p class="mono tag">Computer vision · AWS</p>
-          <h3>Number Plate Recognition</h3>
-          <p>OpenCV built for crowded Indian traffic, with text extraction running on AWS.</p>
-        </div>
-        <span class="open mono">Open ↗</span>
-      </button>
-    </div>
+    <ol class="works">
+      <li class="work" data-project="medifolio" data-img="https://images.unsplash.com/photo-1758691461990-03b49d969495?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/medifolio.jpg">
+        <span class="w-n mono">01</span>
+        <span class="w-t">Medifolio</span>
+        <span class="w-d">RAG over handwritten prescriptions · Springer paper</span>
+        <span class="w-y mono">2025</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="macrosignal" data-img="https://images.unsplash.com/photo-1560221328-12fe60f83ab8?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/macrosignal.jpg">
+        <span class="w-n mono">02</span>
+        <span class="w-t">MacroSignal</span>
+        <span class="w-d">News → LLaMA 3 features → XGBoost signals</span>
+        <span class="w-y mono">Ongoing</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="toxic" data-img="https://images.unsplash.com/photo-1675352161865-27816c76141a?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/toxic.jpg">
+        <span class="w-n mono">03</span>
+        <span class="w-t">Toxic Comment Detection</span>
+        <span class="w-d">Multi-label RoBERTa · HackMIT 3rd place</span>
+        <span class="w-y mono">2022–</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="arima" data-img="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/arima.jpg">
+        <span class="w-n mono">04</span>
+        <span class="w-t">ARIMA × XGBoost</span>
+        <span class="w-d">Hybrid time-series forecasting · UCD</span>
+        <span class="w-y mono">2026</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="syncsphere" data-img="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/syncsphere.jpg">
+        <span class="w-n mono">05</span>
+        <span class="w-t">SyncSphere</span>
+        <span class="w-d">Encrypted chat, WebRTC video, live translation</span>
+        <span class="w-y mono">2024</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="esg" data-img="https://images.unsplash.com/photo-1782679226951-2e916ce69988?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/esg.jpg">
+        <span class="w-n mono">06</span>
+        <span class="w-t">Green Bonds &amp; ESG</span>
+        <span class="w-d">Panel-data study with fixed effects</span>
+        <span class="w-y mono">2026</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="plates" data-img="https://images.unsplash.com/photo-1532633130319-f16ab0a3a9c4?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/plates.jpg">
+        <span class="w-n mono">07</span>
+        <span class="w-t">Number Plate Recognition</span>
+        <span class="w-d">OpenCV for crowded Indian traffic, on AWS</span>
+        <span class="w-y mono">—</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+    </ol>
+    <p class="mono works-note">Click a project for the full story, numbers and code.</p>
   </section>
 
   <section id="path" class="section">
     <header class="sec-head">
-      <p class="mono idx">02</p>
-      <h2>The <em class="serif">path</em> so far</h2>
-      <p class="sec-note">From analyst desks in Pune to AI governance in Dublin.</p>
+      <p class="mono kicker">(02) — Experience</p>
+      <h2 class="sec-title"><span class="line"><span class="word">The</span> <span class="word serif"><em>path</em></span> <span class="word">so</span> <span class="word">far</span></span></h2>
     </header>
 
-    <ol class="timeline">
-      <li style="--c:var(--lilac)">
+    <div class="timeline">
+      <div class="tl-rail"><i class="tl-fill"></i></div>
+      <article class="job">
         <p class="mono when">Sep 2026 — now</p>
-        <div class="t-body">
+        <div>
           <h3>AI Governance Programme</h3>
           <p class="org">OrcaWise RAIMS · Remote</p>
           <p>Defining operational controls for an LLM that reviews vendor NDAs inside a contract lifecycle platform used by critical infrastructure clients. Each week I turn a standard like the EU AI Act into requirements the system has to meet.</p>
         </div>
-      </li>
-      <li style="--c:var(--sun)">
+      </article>
+      <article class="job">
         <p class="mono when">Mar 2026 — now</p>
-        <div class="t-body">
+        <div>
           <h3>Team Head, Passenger Service</h3>
           <p class="org">Sky Handling Partner · Dublin Airport</p>
           <p>Leading an eight-person team across check-in, gate and boarding. Exception tracking and checklists cut handover prep from 25 to 15 minutes and lifted pre-boarding checks from 92% to 98%.</p>
         </div>
-      </li>
-      <li style="--c:var(--sky)">
+      </article>
+      <article class="job">
         <p class="mono when">Apr — Jul 2026</p>
-        <div class="t-body">
+        <div>
           <h3>LLM Engineering Practitioner</h3>
           <p class="org">OrcaWise Industry Practicum · Dublin</p>
           <p>Customize track, with Extract as a second specialisation. Built structured-extraction workflows in Python, tested outputs against expected results, and mapped EU AI Act risk tiers onto input validation, traceability and human review.</p>
         </div>
-      </li>
-      <li style="--c:var(--lime)">
+      </article>
+      <article class="job">
         <p class="mono when">2025 — 2026</p>
-        <div class="t-body">
+        <div>
           <h3>MSc Data &amp; Computational Science</h3>
           <p class="org">University College Dublin</p>
           <p>Mathematical modelling, forecasting and econometrics, including the ARIMA × XGBoost hybrid and the green bond ESG study.</p>
         </div>
-      </li>
-      <li style="--c:var(--coral)">
+      </article>
+      <article class="job">
         <p class="mono when">Jun 2024 — Aug 2025</p>
-        <div class="t-body">
+        <div>
           <h3>Compliance Data Analyst → Intern Lead</h3>
           <p class="org">DeepCytes Cyber Labs (UK) · Mumbai</p>
           <ul>
@@ -212,10 +206,10 @@
             <li>Power BI dashboards used by 8+ stakeholders. Promoted to lead 20 interns; offered a full-time role.</li>
           </ul>
         </div>
-      </li>
-      <li style="--c:var(--sky)">
+      </article>
+      <article class="job">
         <p class="mono when">Jan 2022 — May 2024</p>
-        <div class="t-body">
+        <div>
           <h3>Associate Data Analyst</h3>
           <p class="org">NSM Technologies · Pune</p>
           <ul>
@@ -224,72 +218,77 @@
             <li>Cut a 14-table Power BI model's refresh from 18 to 7 minutes and standardised 12 KPIs across four departments.</li>
           </ul>
         </div>
-      </li>
-      <li style="--c:var(--lilac)">
+      </article>
+      <article class="job">
         <p class="mono when">2021 — 2025</p>
-        <div class="t-body">
+        <div>
           <h3>BTech Computer Science &amp; Engineering</h3>
           <p class="org">MIT World Peace University · Pune · CGPA 8.58 / 10</p>
           <p>Where Medifolio, SyncSphere and the HackMIT toxic comment detector started.</p>
         </div>
-      </li>
-    </ol>
+      </article>
+    </div>
   </section>
 
   <section id="about" class="section about">
     <header class="sec-head">
-      <p class="mono idx">03</p>
-      <h2>About <em class="serif">me</em></h2>
+      <p class="mono kicker">(03) — About</p>
     </header>
+    <p class="about-big reveal-text">I like the <em class="serif">unglamorous</em> part of AI work: getting the data right, checking the numbers twice, and testing models the way they'll actually be used.</p>
     <div class="about-grid">
       <div class="about-text">
-        <p class="big">I like the <em class="serif">unglamorous</em> part of AI work: getting the data right, checking the numbers twice, and testing models the way they'll actually be used.</p>
         <p>I studied computer science in Pune and spent my first working years in data and compliance, where a single wrong SQL join can quietly misreport thousands of refunds. That made me careful. Now I'm in Dublin, finishing an MSc at UCD and working on how LLMs should be governed when they make real decisions.</p>
         <p>Off the keyboard I run shifts at Dublin Airport. It has taught me more about making calls under pressure than any course has.</p>
       </div>
       <dl class="facts">
-        <div style="--c:var(--lime)"><dt class="mono">Published</dt><dd><a href="https://doi.org/10.1007/978-3-032-08638-9_13">Medifolio</a>, Springer CCIS, ICICCT 2025 (first author)<br>Sync Sphere, IJIRCCE vol. 12, 2024</dd></div>
-        <div style="--c:var(--sky)"><dt class="mono">Certified</dt><dd>Microsoft Power BI Data Analyst Associate<br>Google Project Management Professional<br>Industrial IoT, Siemens CoE / NITTTR Bhopal</dd></div>
-        <div style="--c:var(--coral)"><dt class="mono">Awards</dt><dd>3rd place, HackMIT at MIT-WPU</dd></div>
-        <div style="--c:var(--sun)"><dt class="mono">Toolkit</dt><dd>Python · SQL · LangChain · LLaMA 3 · FAISS · pgvector · Pinecone · XGBoost · scikit-learn · PyTorch · FastAPI · Flask · Power BI · AWS · Docker</dd></div>
+        <div><dt class="mono">Published</dt><dd><a href="https://doi.org/10.1007/978-3-032-08638-9_13" target="_blank" rel="noopener">Medifolio</a>, Springer CCIS, ICICCT 2025 (first author)<br>Sync Sphere, IJIRCCE vol. 12, 2024</dd></div>
+        <div><dt class="mono">Certified</dt><dd>Microsoft Power BI Data Analyst Associate<br>Google Project Management Professional<br>Industrial IoT, Siemens CoE / NITTTR Bhopal</dd></div>
+        <div><dt class="mono">Awards</dt><dd>3rd place, HackMIT at MIT-WPU</dd></div>
+        <div><dt class="mono">Toolkit</dt><dd>Python, SQL, LangChain, LLaMA 3, FAISS, pgvector, Pinecone, XGBoost, scikit-learn, PyTorch, FastAPI, Flask, Power BI, AWS, Docker</dd></div>
       </dl>
     </div>
   </section>
 
   <section id="contact" class="contact">
-    <p class="mono idx">04 — Contact</p>
-    <h2 class="contact-h">Got messy data<br><em class="serif">and a deadline?</em></h2>
-    <p class="contact-sub">I'm looking for AI engineering and data roles in Ireland or India. Email is the quickest way to reach me.</p>
+    <p class="mono kicker">(04) — Contact</p>
+    <h2 class="contact-title"><span class="line"><span class="word">Got</span> <span class="word">messy</span> <span class="word">data</span></span><span class="line serif"><em><span class="word">and</span> <span class="word">a</span> <span class="word">deadline?</span></em></span></h2>
     <div class="contact-row">
-      <a href="mailto:soham.barve05@gmail.com" class="btn btn-solid">soham.barve05@gmail.com <span>↗</span></a>
-      <button class="btn btn-ghost" id="copy-mail">Copy email</button>
-      <a href="https://www.linkedin.com/in/sohambarve" class="btn btn-ghost">LinkedIn ↗</a>
-      <a href="https://github.com/sohambarve03" class="btn btn-ghost">GitHub ↗</a>
+      <a href="mailto:soham.barve05@gmail.com" class="mail magnetic">soham.barve05@gmail.com <span>↗</span></a>
+      <button class="btn btn-line" id="copy-mail"><span>Copy email</span></button>
     </div>
+    <ul class="socials">
+      <li><a href="https://www.linkedin.com/in/sohambarve" target="_blank" rel="noopener"><span>LinkedIn</span> <i>↗</i></a></li>
+      <li><a href="https://github.com/sohambarve03" target="_blank" rel="noopener"><span>GitHub</span> <i>↗</i></a></li>
+      <li><a href="https://doi.org/10.1007/978-3-032-08638-9_13" target="_blank" rel="noopener"><span>Springer paper</span> <i>↗</i></a></li>
+    </ul>
   </section>
 
 </main>
 
 <footer class="foot">
-  <span class="brand"><span class="brand-mark">sb</span>Soham Barve</span>
-  <span class="mono dim">Designed &amp; built in Dublin · 2026</span>
-  <span class="mono dim kbd-hint">Press <kbd>/</kbd> to jump anywhere</span>
-  <a href="#top" class="mono">Back to top ↑</a>
+  <div class="foot-big serif" aria-hidden="true"><em>Soham</em> Barve</div>
+  <div class="foot-row mono">
+    <span>© 2026 · Designed &amp; built in Dublin</span>
+    <span class="hide-sm">Press <kbd>/</kbd> to jump anywhere</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
 </footer>
 
 <dialog id="detail" class="detail">
-  <button class="detail-close mono" aria-label="Close">Esc ✕</button>
+  <button class="detail-close mono" aria-label="Close">Close ✕</button>
   <div id="detail-content"></div>
 </dialog>
 
 <dialog id="palette" class="palette">
   <input id="palette-input" placeholder="Jump to… try “medifolio” or “email”" autocomplete="off" aria-label="Search">
   <ul id="palette-list"></ul>
-  <p class="mono dim palette-foot">↑↓ to move · Enter to go · Esc to close</p>
+  <p class="mono palette-foot">↑↓ to move · Enter to go · Esc to close</p>
 </dialog>
 
-<div class="toast mono" id="toast" role="status">Copied to clipboard</div>
+<div class="toast mono" id="toast" role="status"></div>
 
-<script src="main.js?v=7"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="main.js?v=8"></script>
 </body>
 </html>
