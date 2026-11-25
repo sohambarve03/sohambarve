@@ -185,12 +185,14 @@
     });
     walk(big);
     gsap.to('.reveal-text .rw', { opacity: 1, stagger: .1, ease: 'none', scrollTrigger: { trigger: big, start: 'top 80%', end: 'bottom 45%', scrub: true } });
-    // scroll-linked unroll: each block starts folded up flat like paper on a roll,
-    // and unrolls downwards as you scroll it into view (and rolls back up when you scroll back)
+    // scroll-linked inward roll at both edges of the screen: blocks curl away from you
+    // as they come in at the bottom, sit flat in the middle, and curl away again as they leave at the top
     gsap.utils.toArray('.work, .job, .about-big, .about-text, .facts > div, .contact-title, .contact-row, .socials, .sec-head').forEach(el => {
-      gsap.fromTo(el,
-        { rotationX: -88, opacity: 0, transformPerspective: 1000, transformOrigin: '50% 0%' },
-        { rotationX: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 62%', scrub: .4 } });
+      gsap.set(el, { transformPerspective: 900, transformOrigin: '50% 50%' });
+      gsap.timeline({ scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: .4 } })
+        .fromTo(el, { rotationX: -72, opacity: .15, z: -60 }, { rotationX: 0, opacity: 1, z: 0, ease: 'power1.out', duration: .32 })
+        .to(el, { rotationX: 0, duration: .36 })
+        .to(el, { rotationX: 72, opacity: .15, z: -60, ease: 'power1.in', duration: .32 });
     });
     gsap.from('.foot-big', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.foot', start: 'top 90%' } });
     gsap.to('.hero-title', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
