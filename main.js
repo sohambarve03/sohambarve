@@ -11,7 +11,7 @@
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
     try { localStorage.setItem('theme', next); } catch (e) {}
-    $('meta[name="theme-color"]').setAttribute('content', next === 'dark' ? '#121110' : '#f3efe7');
+    $('meta[name="theme-color"]').setAttribute('content', next === 'dark' ? '#161229' : '#fbf4e6');
     drawAscii();
   });
 
@@ -81,29 +81,82 @@
     e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
 
-  /* ---------- marquee: drifts on its own, speeds up and flips with scroll ---------- */
-  const track = $('.marquee-track');
+  /* ---------- paper roll: a 3D drum of words that turns as you scroll ---------- */
+  const drum = $('.roll-drum'), rollEl = $('.roll');
+  const WORDS = ['Python', 'RAG pipelines', 'SQL', 'LangChain', 'LLaMA 3', 'pgvector', 'XGBoost', 'FastAPI', 'Power BI', 'AWS', 'Docker', 'EU AI Act'];
+  const INKS = ['#1d1537', '#ff4d7d', '#3b45ff'];
+  const STARS = ['#ff4d7d', '#3b45ff', '#ffbe2e', '#8bc400'];
+  const N = 14;
+  let tracks = [], half = 0;
+  const buildRoll = () => {
+    const R = parseFloat(getComputedStyle(rollEl).getPropertyValue('--R')) || 120;
+    const faceH = 2 * R * Math.tan(Math.PI / N) + 1;
+    drum.textContent = '';
+    tracks = [];
+    for (let i = 0; i < N; i++) {
+      const f = document.createElement('div'); f.className = 'roll-face';
+      f.style.height = faceH + 'px'; f.style.marginTop = (-faceH / 2) + 'px';
+      f.style.transform = `rotateX(${-i * 360 / N}deg) translateZ(${R}px)`;
+      const t = document.createElement('div'); t.className = 'roll-track';
+      t.style.fontSize = (faceH * .56) + 'px'; t.style.color = INKS[i % 3];
+      let html = '';
+      for (let r2 = 0; r2 < 3; r2++) for (let k = 0; k < WORDS.length; k++) {
+        const w = WORDS[(k + i * 5) % WORDS.length];
+        html += ((k + i) % 2 ? `<span class="serif"><em>${w}</em></span>` : `<span>${w}</span>`) + `<i style="color:${STARS[(k + i) % 4]}">✳</i>`;
+      }
+      t.innerHTML = html; f.appendChild(t); drum.appendChild(f);
+      tracks.push(t);
+    }
+    half = tracks[0].scrollWidth / 3;
+  };
+  buildRoll();
+  let rollTimer; addEventListener('resize', () => { clearTimeout(rollTimer); rollTimer = setTimeout(buildRoll, 200); });
+  document.fonts && document.fonts.ready.then(() => { if (tracks[0]) half = tracks[0].scrollWidth / 3; });
   if (hasGsap) {
-    let x = 0, dir = 1, boost = 0, half = 0;
-    const measure = () => half = track.scrollWidth / 2;
-    measure(); addEventListener('resize', measure);
-    ScrollTrigger.create({ onUpdate: s => { dir = s.direction; boost = Math.min(Math.abs(s.getVelocity()) / 120, 18); } });
+    let ang = 0, slide = 0, dir = 1, boost = 0;
+    ScrollTrigger.create({ onUpdate: st => { dir = st.direction; boost = Math.min(Math.abs(st.getVelocity()) / 90, 22); } });
     gsap.ticker.add(() => {
-      x -= (0.6 + boost) * dir;
-      boost *= .92;
-      if (x <= -half) x += half; if (x > 0) x -= half;
-      track.style.transform = `translate3d(${x}px,0,0)`;
+      const sp = (0.5 + boost) * dir;
+      ang += sp * .55; slide -= sp * 1.1; boost *= .93;
+      drum.style.transform = `rotateX(${ang}deg)`;
+      if (half) slide = ((slide % half) - half) % half;
+      tracks.forEach((t, i) => t.style.transform = `translateX(${(i % 2 ? -half - slide : slide) - (i * 41) % 200}px)`);
     });
   }
+
+  /* ---------- hero letters thicken near the cursor ---------- */
+  $$('.hero-title .word:not(.hero-arrow):not(.badge-word)').forEach(w => {
+    w.innerHTML = [...w.textContent].map(c => `<span class="ch">${c}</span>`).join('');
+  });
+  const chars = $$('.hero-title .ch');
+  if (fine) {
+    const hero = $('.hero'); let raf = 0;
+    hero.addEventListener('pointermove', e => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        chars.forEach(c => {
+          const r = c.getBoundingClientRect();
+          const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+          const k = Math.max(0, 1 - d / 260);
+          const serif = c.closest('.serif');
+          c.style.fontWeight = Math.round((serif ? 400 : 600) + k * (serif ? 400 : 200));
+        });
+      });
+    });
+    hero.addEventListener('pointerleave', () => chars.forEach(c => c.style.fontWeight = ''));
+  }
+  if (hasGsap) gsap.to(chars, { keyframes: [{ fontWeight: 800, duration: .25 }, { fontWeight: 600, duration: .5 }], stagger: .035, delay: 2.4, ease: 'power2.inOut', clearProps: 'fontWeight' });
 
   /* ---------- scroll animations ---------- */
   if (hasGsap) {
     $$('.sec-title .word, .contact-title .word').forEach(w => gsap.from(w, { yPercent: 115, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: w.closest('h2'), start: 'top 85%' } }));
     gsap.utils.toArray('.kicker').forEach(k => gsap.from(k, { opacity: 0, x: -20, duration: .9, ease: 'expo.out', scrollTrigger: { trigger: k, start: 'top 90%' } }));
-    gsap.from('.num', { y: 40, opacity: 0, duration: 1, ease: 'expo.out', stagger: .08, scrollTrigger: { trigger: '.numbers', start: 'top 85%' } });
+    gsap.fromTo('.sheet', { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 -12px 0)', ease: 'none', scrollTrigger: { trigger: '.sheet', start: 'top 92%', end: 'top 40%', scrub: .6 } });
+    gsap.utils.toArray('.hl').forEach(h => gsap.fromTo(h, { '--hlx': 0 }, { '--hlx': 1, duration: .9, ease: 'expo.out', delay: h.closest('.hero') ? 2.2 : 0, scrollTrigger: h.closest('.hero') ? null : { trigger: h, start: 'top 85%' } }));
     $$('[data-count]').forEach(n => {
       const o = { v: 0 };
-      gsap.to(o, { v: +n.dataset.count, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: n, start: 'top 90%' }, onUpdate: () => n.textContent = Math.round(o.v) });
+      gsap.to(o, { v: +n.dataset.count, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: n, start: 'top 70%' }, onUpdate: () => n.textContent = Math.round(o.v) });
     });
     gsap.from('.work', { y: 50, opacity: 0, duration: 1, ease: 'expo.out', stagger: .07, scrollTrigger: { trigger: '.works', start: 'top 85%' } });
     gsap.to('.tl-fill', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.timeline', start: 'top 60%', end: 'bottom 60%', scrub: true } });
@@ -158,8 +211,8 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const cs = getComputedStyle(root);
     ctx.fillStyle = cs.getPropertyValue('--bg2'); ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = cs.getPropertyValue('--ink');
-    ctx.font = `${cell + 1.5}px "JetBrains Mono", monospace`; ctx.textBaseline = 'top';
+    ctx.fillStyle = cs.getPropertyValue('--blue');
+    ctx.font = `${cell + 1.5}px "DM Mono", monospace`; ctx.textBaseline = 'top';
     const dark = root.dataset.theme === 'dark';
     for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
       const i = (y * cols + x) * 4;
