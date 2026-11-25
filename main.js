@@ -167,10 +167,8 @@
       const o = { v: 0 };
       gsap.to(o, { v: +n.dataset.count, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: n, start: 'top 70%' }, onUpdate: () => n.textContent = Math.round(o.v) });
     });
-    gsap.from('.work', { y: 50, opacity: 0, duration: 1, ease: 'expo.out', stagger: .07, scrollTrigger: { trigger: '.works', start: 'top 85%' } });
     gsap.to('.tl-fill', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.timeline', start: 'top 60%', end: 'bottom 60%', scrub: true } });
     $$('.job').forEach(j => {
-      gsap.from(j, { y: 40, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: j, start: 'top 88%' } });
       ScrollTrigger.create({ trigger: j, start: 'top 60%', onEnter: () => j.classList.add('lit'), onLeaveBack: () => j.classList.remove('lit') });
     });
     // about: words light up as you read
@@ -187,7 +185,13 @@
     });
     walk(big);
     gsap.to('.reveal-text .rw', { opacity: 1, stagger: .1, ease: 'none', scrollTrigger: { trigger: big, start: 'top 80%', end: 'bottom 45%', scrub: true } });
-    gsap.from('.about-grid > *, .socials li, .contact-row', { y: 40, opacity: 0, duration: 1, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: '.about-grid', start: 'top 85%' } });
+    // scroll-linked unroll: each block starts folded up flat like paper on a roll,
+    // and unrolls downwards as you scroll it into view (and rolls back up when you scroll back)
+    gsap.utils.toArray('.work, .job, .about-big, .about-text, .facts > div, .contact-title, .contact-row, .socials, .sec-head').forEach(el => {
+      gsap.fromTo(el,
+        { rotationX: -88, opacity: 0, transformPerspective: 1000, transformOrigin: '50% 0%' },
+        { rotationX: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 62%', scrub: .4 } });
+    });
     gsap.from('.foot-big', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.foot', start: 'top 90%' } });
     gsap.to('.hero-title', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   } else {
