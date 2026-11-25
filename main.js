@@ -11,7 +11,7 @@
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
     try { localStorage.setItem('theme', next); } catch (e) {}
-    $('meta[name="theme-color"]').setAttribute('content', next === 'dark' ? '#161229' : '#fbf4e6');
+    $('meta[name="theme-color"]').setAttribute('content', next === 'dark' ? '#111111' : '#f3f1ec');
     drawAscii();
   });
 
@@ -84,8 +84,8 @@
   /* ---------- paper roll: a 3D drum of words that turns as you scroll ---------- */
   const drum = $('.roll-drum'), rollEl = $('.roll');
   const WORDS = ['Python', 'RAG pipelines', 'SQL', 'LangChain', 'LLaMA 3', 'pgvector', 'XGBoost', 'FastAPI', 'Power BI', 'AWS', 'Docker', 'EU AI Act'];
-  const INKS = ['#1d1537', '#ff4d7d', '#3b45ff'];
-  const STARS = ['#ff4d7d', '#3b45ff', '#ffbe2e', '#8bc400'];
+  const INKS = ['#151515', '#2c44f0', '#151515'];
+  const STARS = ['#2c44f0', '#a3a3a3', '#2c44f0', '#a3a3a3'];
   const N = 14;
   let tracks = [], half = 0;
   const buildRoll = () => {
