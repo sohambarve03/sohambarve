@@ -10,10 +10,19 @@
   $('#theme-btn').addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
-    try { localStorage.setItem('theme', next); } catch (e) {}
-    $('meta[name="theme-color"]').setAttribute('content', next === 'dark' ? '#111111' : '#f3f1ec');
+    try { sessionStorage.setItem('theme-choice', next); } catch (e) {}
     drawAscii();
   });
+  // if the visitor changes their phone or computer theme while the page is open, follow it
+  // (unless they picked one with the toggle during this visit)
+  const sysDark = matchMedia('(prefers-color-scheme: dark)');
+  const followSystem = () => {
+    let picked = null; try { picked = sessionStorage.getItem('theme-choice'); } catch (e) {}
+    if (picked) return;
+    root.dataset.theme = sysDark.matches ? 'dark' : 'light';
+    drawAscii();
+  };
+  sysDark.addEventListener ? sysDark.addEventListener('change', followSystem) : sysDark.addListener(followSystem);
 
   /* ---------- clock ---------- */
   const clock = $('#clock');
