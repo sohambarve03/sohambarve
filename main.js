@@ -196,7 +196,7 @@
     gsap.to('.reveal-text .rw', { opacity: 1, stagger: .1, ease: 'none', scrollTrigger: { trigger: big, start: 'top 80%', end: 'bottom 45%', scrub: true } });
     // scroll-linked inward roll at both edges of the screen: blocks curl away from you
     // as they come in at the bottom, sit flat in the middle, and curl away again as they leave at the top
-    gsap.utils.toArray('.work, .job, .about-big, .about-text, .facts > div, .contact-title, .contact-row, .socials, .sec-head').forEach(el => {
+    gsap.utils.toArray('.work, .job, .stack-group, .about-big, .about-text, .facts > div, .contact-title, .contact-row, .socials, .sec-head').forEach(el => {
       gsap.set(el, { transformPerspective: 900, transformOrigin: '50% 50%' });
       gsap.timeline({ scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: .4 } })
         .fromTo(el, { rotationX: -72, opacity: .15, z: -60 }, { rotationX: 0, opacity: 1, z: 0, ease: 'power1.out', duration: .32 })
@@ -271,6 +271,80 @@
     w.tabIndex = 0; w.setAttribute('role', 'button');
   });
 
+  /* ---------- hero background: messy dots drift right and snap into a neat grid ---------- */
+  (() => {
+    const cv = $('#flow'), hero = $('.hero');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    let W = 0, H = 0, dpr = 1, cells = [], dots = [], cols = {}, visible = true, frame = 0;
+    const readColors = () => { const cs = getComputedStyle(root); cols = { dim: cs.getPropertyValue('--dim').trim(), acc: cs.getPropertyValue('--accent').trim() }; };
+    const layout = () => {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      const r = hero.getBoundingClientRect(); W = r.width; H = r.height;
+      cv.width = W * dpr; cv.height = H * dpr;
+      const top = $('.hero-top').getBoundingClientRect(), fig = $('#portrait').getBoundingClientRect();
+      const rel = b => ({ l: b.left - r.left, t: b.top - r.top, r: b.right - r.left, b: b.bottom - r.top });
+      const T = rel(top), F = rel(fig);
+      let box;
+      if (innerWidth > 760) {
+        const line = $$('.hero-title .line').reduce((m, l) => Math.max(m, [...l.querySelectorAll('.word')].reduce((mm, w) => Math.max(mm, w.getBoundingClientRect().right - r.left), 0)), 0);
+        box = { l: Math.max(line + 48, W * .55), r: T.r, t: T.b + 34, b: F.t - 30 };
+      } else {
+        box = { l: F.r + 24, r: T.r, t: F.t + 6, b: F.b - 6 };
+      }
+      const gap = innerWidth > 760 ? 16 : 13;
+      cells = [];
+      const nc = Math.min(innerWidth > 760 ? 18 : 99, Math.floor((box.r - box.l) / gap)), nr = Math.min(innerWidth > 760 ? 12 : 99, Math.floor((box.b - box.t) / gap));
+      const x0 = box.r - 6, y0 = box.t + Math.max(0, ((box.b - box.t) - nr * gap) / 2);
+      for (let r2 = 0; r2 < nr; r2++) for (let c = 0; c < nc; c++) cells.push({ x: x0 - c * gap, y: y0 + r2 * gap, used: false });
+      const n = Math.min(260, Math.round(cells.length * 1.15) + 40);
+      dots = Array.from({ length: n }, () => spawn(true));
+      readColors();
+    };
+    const spawn = (anywhere) => ({
+      x: anywhere ? Math.random() * W * .5 : -10 - Math.random() * 80,
+      y: Math.random() * H, vx: .55 + Math.random() * .7, ph: Math.random() * 6.28, cell: null, k: 0, life: 0
+    });
+    const step = () => {
+      frame++;
+      if (frame % 60 === 0) readColors();
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+      const free = cells.filter(c => !c.used);
+      for (const d of dots) {
+        if (!d.cell) {
+          d.ph += .05;
+          d.x += d.vx; d.y += Math.sin(d.ph) * .6 + (Math.random() - .5) * .8;
+          if (d.x > W * .3 && free.length) {          // close enough: claim a free cell
+            const c = free.splice(Math.floor(Math.random() * Math.min(free.length, 12)), 1)[0];
+            c.used = true; d.cell = c; d.k = 0; d.life = 360 + Math.random() * 420;
+          }
+          if (d.x > W + 10) Object.assign(d, spawn(false));
+          ctx.globalAlpha = .38; ctx.fillStyle = cols.dim;
+          ctx.beginPath(); ctx.arc(d.x, d.y, 1.6, 0, 6.283); ctx.fill();
+        } else {
+          d.k = Math.min(1, d.k + .02);
+          const e = 1 - Math.pow(1 - d.k, 3);
+          d.x += (d.cell.x - d.x) * .07 * (0.3 + e); d.y += (d.cell.y - d.y) * .07 * (0.3 + e);
+          d.life--;
+          const s = 1.6 + e * 2.6;
+          ctx.globalAlpha = .35 + e * .4; ctx.fillStyle = e > .5 ? cols.acc : cols.dim;
+          ctx.fillRect(d.x - s, d.y - s, s * 2, s * 2);
+          if (d.life <= 0) { d.cell.used = false; Object.assign(d, spawn(false)); }
+        }
+      }
+      ctx.globalAlpha = 1;
+    };
+    const loop = () => { if (visible) step(); requestAnimationFrame(loop); };
+    new IntersectionObserver(es => visible = es[0].isIntersecting).observe(hero);
+    let lt; addEventListener('resize', () => { clearTimeout(lt); lt = setTimeout(layout, 200); });
+    $('#theme-btn').addEventListener('click', readColors);
+    const start = () => { layout(); requestAnimationFrame(loop); };
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(start, 50));
+  })();
+
+  /* ---------- project rows: headline number + tech tags ---------- */
+  const HEADLINE = { medifolio: '~95% retrieval accuracy', macrosignal: '24 assets tracked', toxic: '0.82 macro-F1', arima: 'MASE 0.84 vs 0.96', syncsphere: '25+ live users' };
+
   /* ---------- project details ---------- */
   const REPOS = {
     medifolio: 'https://github.com/sohambarve03/medifolio-llm-medical-system',
@@ -318,6 +392,12 @@
       stack: ['OpenCV', 'Python', 'AWS EC2', 'S3', 'IAM', 'MongoDB'] }
   };
   const dlg = $('#detail'), dc = $('#detail-content');
+  $$('.work').forEach(w => {
+    const p = P[w.dataset.project]; if (!p) return;
+    const t = document.createElement('span'); t.className = 'w-tags';
+    t.innerHTML = (HEADLINE[w.dataset.project] ? `<b>${HEADLINE[w.dataset.project]}</b>` : '') + p.stack.slice(0, 4).map(x => `<i>${x}</i>`).join('');
+    w.appendChild(t);
+  });
   const openProject = key => {
     const p = P[key]; if (!p) return;
     const src = imgFor[key];
