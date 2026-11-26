@@ -276,7 +276,7 @@
     const cv = $('#flow'), hero = $('.hero');
     if (!cv) return;
     const ctx = cv.getContext('2d');
-    let W = 0, H = 0, dpr = 1, cells = [], dots = [], cols = {}, visible = true, frame = 0;
+    let W = 0, H = 0, dpr = 1, gap = 14, cells = [], dots = [], cols = {}, visible = true, frame = 0;
     const readColors = () => { const cs = getComputedStyle(root); cols = { dim: cs.getPropertyValue('--dim').trim(), acc: cs.getPropertyValue('--accent').trim() }; };
     const layout = () => {
       dpr = Math.min(devicePixelRatio || 1, 2);
@@ -292,12 +292,26 @@
       } else {
         box = { l: F.r + 24, r: T.r, t: F.t + 6, b: F.b - 6 };
       }
-      const gap = innerWidth > 760 ? 16 : 13;
-      cells = [];
-      const nc = Math.min(innerWidth > 760 ? 18 : 99, Math.floor((box.r - box.l) / gap)), nr = Math.min(innerWidth > 760 ? 12 : 99, Math.floor((box.b - box.t) / gap));
-      const x0 = box.r - 6, y0 = box.t + Math.max(0, ((box.b - box.t) - nr * gap) / 2);
-      for (let r2 = 0; r2 < nr; r2++) for (let c = 0; c < nc; c++) cells.push({ x: x0 - c * gap, y: y0 + r2 * gap, used: false });
-      const n = Math.min(260, Math.round(cells.length * 1.15) + 40);
+      // the sorted dots spell SOHAM / BARVE in a 5x7 dot font
+      const FONT = {
+        S: ['01111', '10000', '10000', '01110', '00001', '00001', '11110'],
+        O: ['01110', '10001', '10001', '10001', '10001', '10001', '01110'],
+        H: ['10001', '10001', '10001', '11111', '10001', '10001', '10001'],
+        A: ['01110', '10001', '10001', '11111', '10001', '10001', '10001'],
+        M: ['10001', '11011', '10101', '10101', '10001', '10001', '10001'],
+        B: ['11110', '10001', '10001', '11110', '10001', '10001', '11110'],
+        R: ['11110', '10001', '10001', '11110', '10100', '10010', '10001'],
+        V: ['10001', '10001', '10001', '10001', '10001', '01010', '00100'],
+        E: ['11111', '10000', '10000', '11110', '10000', '10000', '11111']
+      };
+      const WORDS = ['SOHAM', 'BARVE'], COLS = 5 * 6 - 1, ROWS = 7 * 2 + 3;
+      gap = Math.max(5, Math.min(14, (box.r - box.l) / COLS, (box.b - box.t) / ROWS));
+      const x0 = box.r - COLS * gap + gap / 2, y0 = box.t + Math.max(0, ((box.b - box.t) - ROWS * gap) / 2) + gap / 2;
+      WORDS.forEach((word, wi) => [...word].forEach((ch, li) => FONT[ch].forEach((row, ry) => [...row].forEach((bit, rx) => {
+        if (bit === '1') cells.push({ x: x0 + (li * 6 + rx) * gap, y: y0 + (wi * 10 + ry) * gap, used: false });
+      }))));
+      cells.sort((p, q) => p.x - q.x || p.y - q.y);   // fill left to right, so the name "writes" itself
+      const n = cells.length + 70;
       dots = Array.from({ length: n }, () => spawn(true));
       readColors();
     };
@@ -315,8 +329,8 @@
           d.ph += .05;
           d.x += d.vx; d.y += Math.sin(d.ph) * .6 + (Math.random() - .5) * .8;
           if (d.x > W * .3 && free.length) {          // close enough: claim a free cell
-            const c = free.splice(Math.floor(Math.random() * Math.min(free.length, 12)), 1)[0];
-            c.used = true; d.cell = c; d.k = 0; d.life = 360 + Math.random() * 420;
+            const c = free.shift();
+            c.used = true; d.cell = c; d.k = 0; d.life = 1400 + Math.random() * 2400;
           }
           if (d.x > W + 10) Object.assign(d, spawn(false));
           ctx.globalAlpha = .38; ctx.fillStyle = cols.dim;
@@ -326,7 +340,7 @@
           const e = 1 - Math.pow(1 - d.k, 3);
           d.x += (d.cell.x - d.x) * .07 * (0.3 + e); d.y += (d.cell.y - d.y) * .07 * (0.3 + e);
           d.life--;
-          const s = 1.6 + e * 2.6;
+          const s = 1 + e * (gap * .3 - 1);
           ctx.globalAlpha = .35 + e * .4; ctx.fillStyle = e > .5 ? cols.acc : cols.dim;
           ctx.fillRect(d.x - s, d.y - s, s * 2, s * 2);
           if (d.life <= 0) { d.cell.used = false; Object.assign(d, spawn(false)); }
