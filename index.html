@@ -1,109 +1,161 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Soham Barve — AI &amp; Data Engineer</title>
   <meta name="description" content="Soham Barve, AI and data engineer in Dublin. LLM and RAG systems, Python, SQL and machine learning.">
-  <meta name="theme-color" content="#0e1013">
+  <meta name="theme-color" content="#f3f1ec">
   <meta property="og:title" content="Soham Barve — AI & Data Engineer">
   <meta property="og:description" content="I turn messy data into systems.">
   <meta property="og:image" content="https://sohambarve03.github.io/sohambarve/assets/soham.jpg">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e1013'/><text x='16' y='22' font-family='monospace' font-size='16' font-weight='700' text-anchor='middle' fill='%237c9cff'>sb</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='16' fill='%23151515'/><text x='16' y='21.5' font-family='Georgia,serif' font-style='italic' font-size='17' text-anchor='middle' fill='%23ffffff'>s</text></svg>">
   <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=16">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,300..800,0..100,0..1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=15">
 </head>
 <body class="loading">
 
 <div class="loader" aria-hidden="true">
   <div class="loader-inner">
-    <span class="loader-name mono">soham_barve <span class="blink">▍</span></span>
+    <span class="loader-name serif"><em>Soham Barve</em></span>
     <span class="loader-count mono"><span id="load-n">0</span>%</span>
   </div>
   <div class="loader-bar"><i></i></div>
 </div>
-<div class="spot" aria-hidden="true"></div>
+
 <div class="cursor" aria-hidden="true"><span></span></div>
 
 <header class="nav">
-  <a href="#top" class="logo mono">soham<span>_</span>barve</a>
-  <nav class="nav-links mobile-links">
+  <a href="#top" class="logo"><em class="serif">Soham</em> Barve</a>
+  <nav class="nav-links">
     <a href="#work"><span>Work</span></a>
     <a href="#path"><span>Experience</span></a>
+    <a href="#about"><span>About</span></a>
     <a href="#contact"><span>Contact</span></a>
   </nav>
+  <div class="nav-right">
+    <span class="status mono"><i></i>Open to work</span>
+    <button class="theme-btn" id="theme-btn" aria-label="Switch light or dark mode">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g></svg>
+    </button>
+  </div>
 </header>
 
-<div class="shell" id="top">
+<main id="top">
 
-  <aside class="side hero">
-    <div class="side-top">
-      <p class="mono hello fade-up"><span class="dot"></span>Open to work · Dublin <time id="clock"></time></p>
-      <h1 class="hero-title"><span class="line"><span class="word">Soham</span></span><span class="line"><span class="word">Barve</span></span></h1>
-      <p class="role fade-up">AI &amp; Data Engineer</p>
-      <p class="tag fade-up">I turn messy data into <em class="serif">systems.</em></p>
-
-      <nav class="nav-links side-links fade-up" aria-label="Sections">
-        <a href="#overview"><i></i><span>Overview</span></a>
-        <a href="#path"><i></i><span>Experience</span></a>
-        <a href="#work"><i></i><span>Projects</span></a>
-        <a href="#about"><i></i><span>About</span></a>
-        <a href="#contact"><i></i><span>Contact</span></a>
-      </nav>
+  <section class="hero">
+    <div class="hero-top mono">
+      <span>AI &amp; Data Engineer</span>
+      <span>Based in Dublin, IE <time id="clock"></time></span>
+      <span class="hide-sm">MSc · University College Dublin</span>
     </div>
 
-    <div class="side-bottom fade-up">
-      <figure class="portrait" id="portrait">
+    <h1 class="hero-title">
+      <span class="line"><span class="word">I</span> <span class="word">turn</span> <span class="word">messy</span> <span class="word">data</span></span>
+      <span class="line serif"><em><span class="word">into</span> <span class="word">systems.</span></em><span class="word hero-arrow" aria-hidden="true">↘</span></span>
+    </h1>
+
+    <div class="hero-bottom">
+      <p class="hero-sub fade-up">
+        Hi, I'm <strong>Soham Barve</strong>, an AI and data engineer in Dublin. I build RAG pipelines,
+        LLM extraction and data checks in Python and SQL, and I test them the way real people will use them.
+        First-author paper with Springer. Open to roles in Ireland and India.
+      </p>
+      <figure class="portrait fade-up" id="portrait">
         <img src="assets/soham.jpg" alt="Soham Barve" id="portrait-img" width="640" height="800">
         <canvas id="ascii" aria-hidden="true"></canvas>
+        <figcaption class="mono"><span>fig. 01</span><span>hover to reveal</span></figcaption>
       </figure>
-      <div class="side-meta">
-        <ul class="icons">
-          <li><a href="https://github.com/sohambarve03" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a></li>
-          <li><a href="https://www.linkedin.com/in/sohambarve" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a></li>
-          <li><a href="mailto:soham.barve05@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 5.5h18v13H3z M3.5 6l8.5 7 8.5-7"/></svg></a></li>
-          <li><button class="theme-btn" id="theme-btn" aria-label="Switch light or dark mode"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g></svg></button></li>
-        </ul>
-        <p class="mono hint">Hover the photo</p>
+      <div class="hero-cta fade-up">
+        <a href="#work" class="btn btn-fill magnetic"><span>See selected work</span></a>
+        <a href="mailto:soham.barve05@gmail.com" class="btn btn-line magnetic"><span>Get in touch</span></a>
       </div>
     </div>
-  </aside>
+  </section>
 
-  <main class="content">
+  <section class="roll" aria-label="Tools I use: Python, SQL, RAG, LangChain, LLaMA 3, pgvector, XGBoost, FastAPI, Power BI, AWS, Docker, EU AI Act">
+    <div class="roll-drum" aria-hidden="true"></div>
+    <div class="roll-shade" aria-hidden="true"></div>
+  </section>
 
-    <section id="overview" class="block">
-      <p class="hero-sub">
-        I build <strong>RAG pipelines</strong>, <strong>LLM extraction</strong> and <strong>data checks</strong> in Python and SQL,
-        then test them the way real people will use them. I'm finishing an MSc at University College Dublin,
-        I'm first author of a Springer paper, and I'm open to roles in Ireland and India.
-      </p>
-      <div class="hero-cta">
-        <a href="#work" class="btn btn-fill magnetic"><span>See projects</span></a>
-        <a href="mailto:soham.barve05@gmail.com" class="btn btn-line magnetic"><span>Email me</span></a>
-      </div>
+  <section class="numbers sheet" aria-label="Highlights">
+    <div class="num"><p class="n"><span data-count="150">0</span>k+</p><p class="l">payment records validated automatically</p></div>
+    <div class="num"><p class="n">~<span data-count="95">0</span>%</p><p class="l">retrieval accuracy on Medifolio</p></div>
+    <div class="num"><p class="n"><span data-count="24">0</span></p><p class="l">financial assets tracked by MacroSignal</p></div>
+    <div class="num"><p class="n"><span data-count="20">0</span></p><p class="l">interns led across four teams</p></div>
+    <div class="num"><p class="n"><span data-count="2">0</span></p><p class="l">published research papers</p></div>
+  </section>
 
-      <div class="numbers" aria-label="Highlights">
-        <div class="num"><p class="n"><span data-count="150">0</span>k+</p><p class="l">payment records validated automatically</p></div>
-        <div class="num"><p class="n">~<span data-count="95">0</span>%</p><p class="l">retrieval accuracy on Medifolio</p></div>
-        <div class="num"><p class="n"><span data-count="24">0</span></p><p class="l">financial assets tracked by MacroSignal</p></div>
-        <div class="num"><p class="n"><span data-count="20">0</span></p><p class="l">interns led across four teams</p></div>
-      </div>
-    </section>
+  <section id="work" class="section">
+    <header class="sec-head">
+      <p class="mono kicker">(01) — Selected work</p>
+      <h2 class="sec-title"><span class="line"><span class="word">Things</span> <span class="word">I've</span> <span class="word">built</span></span></h2>
+    </header>
 
-    <section class="roll" aria-label="Tools I use: Python, SQL, RAG, LangChain, LLaMA 3, pgvector, XGBoost, FastAPI, Power BI, AWS, Docker, EU AI Act">
-      <div class="roll-drum" aria-hidden="true"></div>
-      <div class="roll-shade" aria-hidden="true"></div>
-    </section>
+    <ol class="works">
+      <li class="work" data-project="medifolio" data-img="https://images.unsplash.com/photo-1758691461990-03b49d969495?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/medifolio.jpg">
+        <span class="w-n mono">01</span>
+        <span class="w-t">Medifolio</span>
+        <span class="w-d">RAG over handwritten prescriptions · Springer paper</span>
+        <span class="w-y mono">2025</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="macrosignal" data-img="https://images.unsplash.com/photo-1560221328-12fe60f83ab8?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/macrosignal.jpg">
+        <span class="w-n mono">02</span>
+        <span class="w-t">MacroSignal</span>
+        <span class="w-d">News → LLaMA 3 features → XGBoost signals</span>
+        <span class="w-y mono">Ongoing</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="toxic" data-img="https://images.unsplash.com/photo-1675352161865-27816c76141a?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/toxic.jpg">
+        <span class="w-n mono">03</span>
+        <span class="w-t">Toxic Comment Detection</span>
+        <span class="w-d">Multi-label RoBERTa · HackMIT 3rd place</span>
+        <span class="w-y mono">2022–</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="arima" data-img="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/arima.jpg">
+        <span class="w-n mono">04</span>
+        <span class="w-t">ARIMA × XGBoost</span>
+        <span class="w-d">Hybrid time-series forecasting · UCD</span>
+        <span class="w-y mono">2026</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="syncsphere" data-img="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/syncsphere.jpg">
+        <span class="w-n mono">05</span>
+        <span class="w-t">SyncSphere</span>
+        <span class="w-d">Encrypted chat, WebRTC video, live translation</span>
+        <span class="w-y mono">2024</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="esg" data-img="https://images.unsplash.com/photo-1782679226951-2e916ce69988?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/esg.jpg">
+        <span class="w-n mono">06</span>
+        <span class="w-t">Green Bonds &amp; ESG</span>
+        <span class="w-d">Panel-data study with fixed effects</span>
+        <span class="w-y mono">2026</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+      <li class="work" data-project="plates" data-img="https://images.unsplash.com/photo-1532633130319-f16ab0a3a9c4?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/plates.jpg">
+        <span class="w-n mono">07</span>
+        <span class="w-t">Number Plate Recognition</span>
+        <span class="w-d">OpenCV for crowded Indian traffic, on AWS</span>
+        <span class="w-y mono">—</span>
+        <span class="w-go" aria-hidden="true">→</span>
+      </li>
+    </ol>
+    <p class="mono works-note">Click any project for the full story, the numbers and the code.</p>
+  </section>
 
-    <section id="path" class="block">
-      <header class="sec-head">
-        <p class="mono kicker">01 · Experience</p>
-        <h2 class="sec-title"><span class="line"><span class="word">Where</span> <span class="word">I've</span> <span class="word">worked</span></span></h2>
-      </header>
-      <div class="timeline">
+  <section id="path" class="section">
+    <header class="sec-head">
+      <p class="mono kicker">(02) — Experience</p>
+      <h2 class="sec-title"><span class="line"><span class="word">The</span> <span class="word serif"><em>path</em></span> <span class="word">so</span> <span class="word">far</span></span></h2>
+    </header>
+
+    <div class="timeline">
       <div class="tl-rail"><i class="tl-fill"></i></div>
       <article class="job">
         <p class="mono when">Sep 2026 — now</p>
@@ -171,73 +223,14 @@
         </div>
       </article>
     </div>
-    </section>
+  </section>
 
-    <section id="work" class="block">
-      <header class="sec-head">
-        <p class="mono kicker">02 · Projects</p>
-        <h2 class="sec-title"><span class="line"><span class="word">Things</span> <span class="word">I've</span> <span class="word">built</span></span></h2>
-      </header>
-      <ol class="works">
-      <li class="work" data-project="medifolio" data-img="https://images.unsplash.com/photo-1758691461990-03b49d969495?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/medifolio.jpg">
-        <span class="w-n mono">01</span>
-        <span class="w-t">Medifolio</span>
-        <span class="w-d">RAG over handwritten prescriptions · Springer paper</span>
-        <span class="w-y mono">2025</span>
-        <span class="w-go" aria-hidden="true">→</span>
-      </li>
-      <li class="work" data-project="macrosignal" data-img="https://images.unsplash.com/photo-1560221328-12fe60f83ab8?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/macrosignal.jpg">
-        <span class="w-n mono">02</span>
-        <span class="w-t">MacroSignal</span>
-        <span class="w-d">News → LLaMA 3 features → XGBoost signals</span>
-        <span class="w-y mono">Ongoing</span>
-        <span class="w-go" aria-hidden="true">→</span>
-      </li>
-      <li class="work" data-project="toxic" data-img="https://images.unsplash.com/photo-1675352161865-27816c76141a?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/toxic.jpg">
-        <span class="w-n mono">03</span>
-        <span class="w-t">Toxic Comment Detection</span>
-        <span class="w-d">Multi-label RoBERTa · HackMIT 3rd place</span>
-        <span class="w-y mono">2022–</span>
-        <span class="w-go" aria-hidden="true">→</span>
-      </li>
-      <li class="work" data-project="arima" data-img="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/arima.jpg">
-        <span class="w-n mono">04</span>
-        <span class="w-t">ARIMA × XGBoost</span>
-        <span class="w-d">Hybrid time-series forecasting · UCD</span>
-        <span class="w-y mono">2026</span>
-        <span class="w-go" aria-hidden="true">→</span>
-      </li>
-      <li class="work" data-project="syncsphere" data-img="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/syncsphere.jpg">
-        <span class="w-n mono">05</span>
-        <span class="w-t">SyncSphere</span>
-        <span class="w-d">Encrypted chat, WebRTC video, live translation</span>
-        <span class="w-y mono">2024</span>
-        <span class="w-go" aria-hidden="true">→</span>
-      </li>
-      <li class="work" data-project="esg" data-img="https://images.unsplash.com/photo-1782679226951-2e916ce69988?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/esg.jpg">
-        <span class="w-n mono">06</span>
-        <span class="w-t">Green Bonds &amp; ESG</span>
-        <span class="w-d">Panel-data study with fixed effects</span>
-        <span class="w-y mono">2026</span>
-        <span class="w-go" aria-hidden="true">→</span>
-      </li>
-      <li class="work" data-project="plates" data-img="https://images.unsplash.com/photo-1532633130319-f16ab0a3a9c4?auto=format&fit=crop&w=1000&q=80" data-fallback="assets/projects/plates.jpg">
-        <span class="w-n mono">07</span>
-        <span class="w-t">Number Plate Recognition</span>
-        <span class="w-d">OpenCV for crowded Indian traffic, on AWS</span>
-        <span class="w-y mono">—</span>
-        <span class="w-go" aria-hidden="true">→</span>
-      </li>
-    </ol>
-      <p class="mono works-note">Click any project for the full story, the numbers and the code.</p>
-    </section>
-
-    <section id="about" class="block about">
-      <header class="sec-head">
-        <p class="mono kicker">03 · About</p>
-      </header>
-      <p class="about-big reveal-text">I enjoy the <em class="serif">unglamorous</em> side of AI: getting the data right, checking the numbers twice, and testing models the way they'll really be used.</p>
-      <div class="about-grid">
+  <section id="about" class="section about">
+    <header class="sec-head">
+      <p class="mono kicker">(03) — About</p>
+    </header>
+    <p class="about-big reveal-text">I enjoy the <em class="serif">unglamorous</em> side of AI: getting the data right, checking the numbers twice, and testing models the way they'll really be used.</p>
+    <div class="about-grid">
       <div class="about-text">
         <p>I studied computer science in Pune, then spent my first working years in data and compliance, where one wrong SQL join can quietly misreport thousands of refunds. That taught me to be careful. Now I'm in Dublin, finishing an MSc at UCD and working on how LLMs should be governed when they make real decisions.</p>
         <p>Away from the keyboard I lead shifts at Dublin Airport, which has taught me more about making calls under pressure than any course.</p>
@@ -249,31 +242,31 @@
         <div><dt class="mono">Toolkit</dt><dd>Python, SQL, LangChain, LLaMA 3, FAISS, pgvector, Pinecone, XGBoost, scikit-learn, PyTorch, FastAPI, Flask, Power BI, AWS, Docker</dd></div>
       </dl>
     </div>
-    </section>
+  </section>
 
-    <section id="contact" class="block contact">
-      <header class="sec-head">
-        <p class="mono kicker">04 · Contact</p>
-      </header>
-      <h2 class="contact-title"><span class="line"><span class="word">Messy</span> <span class="word">data?</span> <span class="word serif"><em>Tight</em></span> <span class="word serif"><em>deadline?</em></span></span><span class="line"><span class="word">Let's</span> <span class="word">talk.</span></span></h2>
-      <div class="contact-row">
-        <a href="mailto:soham.barve05@gmail.com" class="mail magnetic">soham.barve05@gmail.com <span>↗</span></a>
-        <button class="btn btn-line" id="copy-mail"><span>Copy email</span></button>
-      </div>
-      <ul class="socials">
+  <section id="contact" class="contact">
+    <p class="mono kicker">(04) — Contact</p>
+    <h2 class="contact-title"><span class="line"><span class="word">Messy</span> <span class="word">data?</span></span><span class="line serif"><em><span class="word">Tight</span> <span class="word">deadline?</span></em></span><span class="line"><span class="word hl">Let's talk.</span></span></h2>
+    <div class="contact-row">
+      <a href="mailto:soham.barve05@gmail.com" class="mail magnetic">soham.barve05@gmail.com <span>↗</span></a>
+      <button class="btn btn-line" id="copy-mail"><span>Copy email</span></button>
+    </div>
+    <ul class="socials">
       <li><a href="https://www.linkedin.com/in/sohambarve" target="_blank" rel="noopener"><span>LinkedIn</span> <i>↗</i></a></li>
       <li><a href="https://github.com/sohambarve03" target="_blank" rel="noopener"><span>GitHub</span> <i>↗</i></a></li>
       <li><a href="https://doi.org/10.1007/978-3-032-08638-9_13" target="_blank" rel="noopener"><span>Springer paper</span> <i>↗</i></a></li>
     </ul>
-    </section>
+  </section>
 
-    <footer class="foot mono">
-      <span>© 2026 Soham Barve</span>
-      <span>Designed &amp; built in Dublin</span>
-      <a href="#top">Back to top ↑</a>
-    </footer>
-  </main>
-</div>
+</main>
+
+<footer class="foot">
+  <div class="foot-big" aria-hidden="true"><em class="serif">Soham</em> <span class="outline">Barve</span></div>
+  <div class="foot-row mono">
+    <span>© 2026 · Designed &amp; built in Dublin</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
 
 <dialog id="detail" class="detail">
   <button class="detail-close mono" aria-label="Close">Close ✕</button>
@@ -285,6 +278,6 @@
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
-<script src="main.js?v=16"></script>
+<script src="main.js?v=15"></script>
 </body>
 </html>

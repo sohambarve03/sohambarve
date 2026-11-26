@@ -11,12 +11,9 @@
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
     try { localStorage.setItem('theme', next); } catch (e) {}
-    $('meta[name="theme-color"]').setAttribute('content', next === 'dark' ? '#0e1013' : '#f6f5f2');
+    $('meta[name="theme-color"]').setAttribute('content', next === 'dark' ? '#111111' : '#f3f1ec');
     drawAscii();
   });
-
-  /* ---------- soft light that follows the mouse ---------- */
-  addEventListener('pointermove', e => { root.style.setProperty('--mx', e.clientX + 'px'); root.style.setProperty('--my', e.clientY + 'px'); }, { passive: true });
 
   /* ---------- clock ---------- */
   const clock = $('#clock');
@@ -87,8 +84,8 @@
   /* ---------- paper roll: a 3D drum of words that turns as you scroll ---------- */
   const drum = $('.roll-drum'), rollEl = $('.roll');
   const WORDS = ['Python', 'RAG pipelines', 'SQL', 'LangChain', 'LLaMA 3', 'pgvector', 'XGBoost', 'FastAPI', 'Power BI', 'AWS', 'Docker', 'EU AI Act'];
-  const INKS = ['var(--face-ink)', 'var(--accent)', 'var(--face-ink)'];
-  const STARS = ['var(--accent)', 'var(--dim)', 'var(--accent)', 'var(--dim)'];
+  const INKS = ['#151515', '#2c44f0', '#151515'];
+  const STARS = ['#2c44f0', '#a3a3a3', '#2c44f0', '#a3a3a3'];
   const N = 14;
   let tracks = [], half = 0;
   const buildRoll = () => {
@@ -198,6 +195,7 @@
         .to(el, { rotationX: 72, opacity: .15, z: -60, ease: 'power1.in', duration: .32 });
     });
     gsap.from('.foot-big', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.foot', start: 'top 90%' } });
+    gsap.to('.hero-title', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   } else {
     $$('.reveal-text').forEach(el => el.style.opacity = 1);
     $$('[data-count]').forEach(n => n.textContent = n.dataset.count);
@@ -229,7 +227,7 @@
     const cs = getComputedStyle(root);
     ctx.fillStyle = cs.getPropertyValue('--bg2'); ctx.fillRect(0, 0, w, h);
     ctx.fillStyle = cs.getPropertyValue('--blue');
-    ctx.font = `${cell + 1.5}px "Geist Mono", monospace`; ctx.textBaseline = 'top';
+    ctx.font = `${cell + 1.5}px "DM Mono", monospace`; ctx.textBaseline = 'top';
     const dark = root.dataset.theme === 'dark';
     for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
       const i = (y * cols + x) * 4;
