@@ -346,4 +346,26 @@
   const copyMail = () => navigator.clipboard ? navigator.clipboard.writeText('soham.barve05@gmail.com').then(() => say('Email copied'), () => say('soham.barve05@gmail.com')) : say('soham.barve05@gmail.com');
   $('#copy-mail').addEventListener('click', copyMail);
 
+  /* ---------- contact form (FormSubmit delivers it to Soham's inbox) ---------- */
+  const form = $('#cform'), fstat = $('#cform-status');
+  if (form) form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    if (fd.get('_honey')) return;
+    const name = (fd.get('name') || '').trim(), email = (fd.get('email') || '').trim(), message = (fd.get('message') || '').trim();
+    fstat.className = 'mono cform-status';
+    if (!name || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fstat.textContent = 'Please add your name, a valid email and a message.'; fstat.classList.add('err'); return; }
+    const btn = $('button[type=submit]', form); btn.disabled = true; fstat.textContent = 'Sending…';
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/soham.barve05@gmail.com', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, message, _subject: 'New message from your portfolio', _template: 'table', _captcha: 'false' })
+      });
+      if (!r.ok) throw new Error(r.status);
+      form.reset(); fstat.textContent = 'Thanks, your message is on its way. I will reply soon.'; fstat.classList.add('ok');
+    } catch (err) {
+      fstat.innerHTML = 'That did not send. Please email <a href="mailto:soham.barve05@gmail.com">soham.barve05@gmail.com</a> instead.'; fstat.classList.add('err');
+    } finally { btn.disabled = false; }
+  });
+
 })();

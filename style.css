@@ -376,3 +376,18 @@ dialog::backdrop { background: rgba(10,9,8,.55); backdrop-filter: blur(4px); }
 /* rolled blocks bulge sideways in 3D; keep them from widening the page */
 html { overflow-x: hidden; }
 main { overflow-x: clip; }
+
+/* contact form */
+.cform { display: grid; gap: 14px; max-width: 760px; padding: 30px 0 34px; border-bottom: 1px solid var(--line); }
+.cform-k { margin: 0; color: var(--dim); }
+.cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cform label { display: grid; gap: 6px; }
+.cform label .mono { color: var(--soft); font-size: 11px; }
+.cform input, .cform textarea { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; outline: none; transition: border-color .25s, box-shadow .25s; resize: vertical; }
+.cform input:focus, .cform textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--tint); }
+.cform .btn { justify-self: start; }
+.cform .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.cform-status { margin: 0; min-height: 1.4em; color: var(--soft); }
+.cform-status.ok { color: #2e9a57; }
+.cform-status.err { color: #d1453b; }
+@media (max-width: 760px) { .cform-row { grid-template-columns: 1fr; } }

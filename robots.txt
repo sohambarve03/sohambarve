@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sohambarve03.github.io/sohambarve/sitemap.xml
